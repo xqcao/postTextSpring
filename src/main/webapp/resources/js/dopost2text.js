@@ -19,7 +19,9 @@ function checkit() {
 	
 	myxmlhttp.onreadystatechange=callbackFunction;
 	
-	var url = "doxml";
+	var url = "dotext";
+	
+	//对应的url:localhost:8082/demo/dotext
 	
 	
 	myxmlhttp.open("POST",url, true);

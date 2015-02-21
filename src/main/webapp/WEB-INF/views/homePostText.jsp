@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Home</title>
-<script type="text/javascript" src="resources/js/alljsfunction.js"></script>
+<script type="text/javascript" src="resources/js/dopost2text.js"></script>
 </head>
 <body>
 	<h1>Hello world!</h1>

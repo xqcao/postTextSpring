@@ -21,7 +21,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<context:component-scan base-package="com.posttext.demo" />
+	
+	<!-- 第2个controller在不同的基础包中所以在这里重新mapping -->
 	<context:component-scan base-package="com.postxml.demo" />
+	
+	<!-- mapping json controller-->
+	<context:component-scan base-package="com.postjson.demo" />
 	
 	
 	

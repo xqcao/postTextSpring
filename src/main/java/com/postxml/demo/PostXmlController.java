@@ -9,6 +9,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hamcrest.core.Is;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -22,15 +23,15 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class PostXmlController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+			.getLogger(PostXmlController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/xml", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -42,23 +43,31 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "home";
+		return "homePostXml";
 	}
 
 	@RequestMapping(value = "/doxml", method = RequestMethod.POST)
 	public void doXmlAndReturnXml(Model model,@RequestParam String name,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		response.setContentType("text/xml; charset=utf-8");//注明返回xml内容,
+		//text/html在firefox可以解析     但ie不能
+		
 		PrintWriter out = response.getWriter();
 		
-		String str = "";
+
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<message>");
 		if("adam".equals(name)){
-			str ="adam login";
+			sb.append("user[" + name + "]  is login").append("</message>");
 		}else{
-			str = "please regist an account frist !!!!!!!!!!!!";
+			
+			sb.append("please regist an account frist, user[" + name + "]  is not exist,").append("</message>");
 		}
-		System.out.println(name+"---------------------------------------");
-		out.println(str);
+		//System.out.println(name+"---------------------------------------");
+		
+		out.println(sb.toString());
 
 	}
 }
